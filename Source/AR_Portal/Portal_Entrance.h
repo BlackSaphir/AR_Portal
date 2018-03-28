@@ -21,11 +21,13 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
+		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 
 	// Variables
 
-private:
+public:
 
 	UPROPERTY(EditAnywhere)
 		class UStaticMeshComponent* Frame;
@@ -39,6 +41,22 @@ private:
 	UPROPERTY(EditAnywhere)
 		class USceneCaptureComponent2D* PortalView;
 
+	UPROPERTY(EditAnywhere)
+		FName Portal_Entrance_Tag;
+
+	UPROPERTY(EditAnywhere)
+		FName Portal_Exit_Tag;
+
+	UPROPERTY(EditAnywhere)
+		class UBoxComponent* Trigger_Box;
+
+
+private:
+
+	bool bCan_teleport;
+	TArray<AActor*> portal_2_Array;
+	UObject* world;
+	//APortal_Exit* Portal_2;
 	
 
 };

@@ -11,18 +11,27 @@ class AR_PORTAL_API APortal_Exit : public AActor
 {
 	GENERATED_BODY()
 	
+		// Functions
+
 public:	
 	// Sets default values for this actor's properties
 	APortal_Exit();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
+
+	// Variable
+
+public:
+
+	UPROPERTY(EditAnywhere)
+		FName Portal_Entrance_Tag;
+
+	UPROPERTY(EditAnywhere)
+		FName Portal_Exit_Tag;
 	
 	
 };

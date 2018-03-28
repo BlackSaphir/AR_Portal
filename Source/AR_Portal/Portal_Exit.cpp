@@ -16,6 +16,8 @@ void APortal_Exit::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	this->Tags.Add(Portal_Exit_Tag);
+
 }
 
 // Called every frame
