@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+//#include "Portal_Exit.h"
 #include "Portal_Entrance.generated.h"
 
 UCLASS()
@@ -50,13 +51,15 @@ public:
 	UPROPERTY(EditAnywhere)
 		class UBoxComponent* Trigger_Box;
 
+	bool bCan_teleport = true;
 
 private:
 
-	bool bCan_teleport;
-	TArray<AActor*> portal_2_Array;
-	UObject* world;
-	//APortal_Exit* Portal_2;
+	TArray<AActor*> portal_2_array;
+	UWorld* world;
+	bool teleported = false;
+	float delay_timer;
+	class APortal_Exit* Portal_2;
 	
 
 };
