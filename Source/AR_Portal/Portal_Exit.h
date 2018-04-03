@@ -56,7 +56,8 @@ public:
 
 private:
 
-	UWorld* world;
+	const UObject* world;
+    UObject* world_Object;
 	TArray<AActor*> portal_1_array;
 	class APortal_Entrance* Portal_1;
 	bool teleported = false;

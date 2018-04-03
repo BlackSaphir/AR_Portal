@@ -38,7 +38,10 @@ void APortal_Exit::BeginPlay()
 	Super::BeginPlay();
 
 	this->Tags.Add(Portal_Exit_Tag);
-	world = GetWorld();
+    //world_Object = Cast<UObject>(GetWorld());
+
+
+    //world_Object = world;
 	
 
 }
@@ -65,6 +68,9 @@ void APortal_Exit::Tick(float DeltaTime)
 
 void APortal_Exit::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
+    world = GetOuter();
+
+    
 	UGameplayStatics::GetAllActorsWithTag(world, Portal_Entrance_Tag, portal_1_array);
 	Portal_1 = Cast<APortal_Entrance>(portal_1_array[0]);
 

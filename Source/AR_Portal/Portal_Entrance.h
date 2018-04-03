@@ -56,7 +56,8 @@ public:
 private:
 
 	TArray<AActor*> portal_2_array;
-	UWorld* world;
+    const UObject* world;
+    UObject* world_Object;
 	bool teleported = false;
 	float delay_timer;
 	class APortal_Exit* Portal_2;
