@@ -67,7 +67,7 @@ void APortal_Entrance::Tick(float DeltaTime)
 
 void APortal_Entrance::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-    world = GetOuter();
+    world = GetWorld();
     
 	UGameplayStatics::GetAllActorsWithTag(world, Portal_Exit_Tag, portal_2_array);
 	Portal_2 = Cast<APortal_Exit>(portal_2_array[0]);

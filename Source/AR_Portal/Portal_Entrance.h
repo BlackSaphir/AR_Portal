@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-//#include "Portal_Exit.h"
+#include "Engine/World.h"
 #include "Portal_Entrance.generated.h"
 
 UCLASS()
@@ -56,7 +56,7 @@ public:
 private:
 
 	TArray<AActor*> portal_2_array;
-    const UObject* world;
+    const UWorld* world;
     UObject* world_Object;
 	bool teleported = false;
 	float delay_timer;
