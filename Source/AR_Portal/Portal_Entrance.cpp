@@ -39,10 +39,6 @@ void APortal_Entrance::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
-    //world_Object = Cast<UObject>(GetWorld());
-    //world_Object = world;
-
 	this->Tags.Add(Portal_Entrance_Tag);
 
 }
@@ -69,18 +65,26 @@ void APortal_Entrance::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActo
 {
     world = GetWorld();
     
-	UGameplayStatics::GetAllActorsWithTag(world, Portal_Exit_Tag, portal_2_array);
-	Portal_2 = Cast<APortal_Exit>(portal_2_array[0]);
-
-	if (bCan_teleport)
-	{
-		bCan_teleport = false;
-		Portal_2->bCan_teleport = false;
-
-		OtherActor->SetActorLocationAndRotation(FVector(Portal_2->Arrow->GetComponentLocation().X, Portal_2->Arrow->GetComponentLocation().Y, Portal_2->Arrow->GetComponentLocation().Z), FQuat(Portal_2->Arrow->GetComponentRotation()));
-
-		teleported = true;
-
-	}
+    if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
+    {
+    
+    if (world != nullptr)
+    {
+        UGameplayStatics::GetAllActorsWithTag(world, Portal_Exit_Tag, portal_2_array);
+        Portal_2 = Cast<APortal_Exit>(portal_2_array[0]);
+        
+        if (bCan_teleport)
+        {
+            bCan_teleport = false;
+            Portal_2->bCan_teleport = false;
+            
+            OtherActor->SetActorLocationAndRotation(FVector(Portal_2->Arrow->GetComponentLocation().X, Portal_2->Arrow->GetComponentLocation().Y, Portal_2->Arrow->GetComponentLocation().Z), FQuat(Portal_2->Arrow->GetComponentRotation()));
+            
+            teleported = true;
+            
+        }
+    }
+    }
+	
 }
 

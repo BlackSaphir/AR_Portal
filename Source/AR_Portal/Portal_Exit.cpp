@@ -38,12 +38,6 @@ void APortal_Exit::BeginPlay()
 	Super::BeginPlay();
 
 	this->Tags.Add(Portal_Exit_Tag);
-    //world_Object = Cast<UObject>(GetWorld());
-
-
-    //world_Object = world;
-	
-
 }
 
 // Called every frame
@@ -68,20 +62,28 @@ void APortal_Exit::Tick(float DeltaTime)
 
 void APortal_Exit::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
-    world = GetOuter();
+    world = GetWorld();
 
+    if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
+    {
+        
+        if (world != nullptr)
+        {
+            UGameplayStatics::GetAllActorsWithTag(world, Portal_Entrance_Tag, portal_1_array);
+            Portal_1 = Cast<APortal_Entrance>(portal_1_array[0]);
+            
+            if (bCan_teleport)
+            {
+                bCan_teleport = false;
+                Portal_1->bCan_teleport = false;
+                
+                OtherActor->SetActorLocationAndRotation(FVector(Portal_1->Arrow->GetComponentLocation().X, Portal_1->Arrow->GetComponentLocation().Y, Portal_1->Arrow->GetComponentLocation().Z), FQuat(Portal_1->Arrow->GetComponentRotation()));
+                
+                teleported = true;
+            }
+            
+        }
     
-	UGameplayStatics::GetAllActorsWithTag(world, Portal_Entrance_Tag, portal_1_array);
-	Portal_1 = Cast<APortal_Entrance>(portal_1_array[0]);
-
-	if (bCan_teleport)
-	{
-		bCan_teleport = false;
-		Portal_1->bCan_teleport = false;
-
-		OtherActor->SetActorLocationAndRotation(FVector(Portal_1->Arrow->GetComponentLocation().X, Portal_1->Arrow->GetComponentLocation().Y, Portal_1->Arrow->GetComponentLocation().Z), FQuat(Portal_1->Arrow->GetComponentRotation()));
-
-		teleported = true;
-	}
+    }
 }
 
