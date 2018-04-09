@@ -33,6 +33,9 @@ protected:
 public:
 
 	UPROPERTY(EditAnywhere)
+		class USceneComponent* DefaultRoot;
+
+	UPROPERTY(EditAnywhere)
 		FName Portal_Entrance_Tag;
 
 	UPROPERTY(EditAnywhere)

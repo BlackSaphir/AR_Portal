@@ -31,6 +31,9 @@ protected:
 public:
 
 	UPROPERTY(EditAnywhere)
+		class USceneComponent* DefaultRoot;
+
+	UPROPERTY(EditAnywhere)
 		class UStaticMeshComponent* Frame;
 
 	UPROPERTY(EditAnywhere)

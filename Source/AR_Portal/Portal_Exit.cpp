@@ -14,20 +14,23 @@ APortal_Exit::APortal_Exit()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	DefaultRoot = CreateDefaultSubobject<USceneComponent>(TEXT("DefaultRoot"));
+	RootComponent = DefaultRoot;
+
 	Frame = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Frame"));
-	RootComponent = Frame;
+	Frame->SetupAttachment(DefaultRoot);
 
 	Arrow = CreateOptionalDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
-	Arrow->SetupAttachment(Frame);
+	Arrow->SetupAttachment(DefaultRoot);
 
 	Plane = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Plane"));
-	Plane->SetupAttachment(Frame);
+	Plane->SetupAttachment(DefaultRoot);
 
 	PortalView = CreateDefaultSubobject<USceneCaptureComponent2D>(TEXT("PortalView"));
-	PortalView->SetupAttachment(Frame);
+	PortalView->SetupAttachment(DefaultRoot);
 
 	Trigger_Box = CreateDefaultSubobject<UBoxComponent>(TEXT("Trigger"));
-	Trigger_Box->SetupAttachment(Frame);
+	Trigger_Box->SetupAttachment(DefaultRoot);
 
 	Trigger_Box->OnComponentBeginOverlap.AddDynamic(this, &APortal_Exit::OnOverlapBegin);
 }
